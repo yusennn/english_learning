@@ -1,0 +1,489 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    overflow-x: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #ffffff;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.navbar::before {
+    display: none;
+}
+
+.vh100 {
+    height: 100vh;
+}
+
+.logo {
+    width: 4.5rem;
+}
+
+.text-brand {
+    font-weight: 600;
+}
+
+.navbar-default {
+    transition: background-color 0.3s ease;
+    background-color: transparent;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5.9rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.container {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.nav-text {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.030em;
+    transition: 0.3s ease;
+    color: white;
+}
+.nav-text2 {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.030em;
+    transition: 0.3s ease;
+    color: rgb(0, 0, 0);
+}
+
+.navbar-default.navbar-trans .nav-link,
+.navbar-default.navbar-reduce .nav-link {
+    transition: all 0.1s ease-in-out;
+    position: relative;
+}
+
+.img_1 {
+    width: 100%;
+}
+
+.bg-image {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+}
+
+.main {
+    position: relative;
+    height: 100%;
+    background: url(./assets/1.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+}
+
+.main::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 0; 
+}
+
+.main .container {
+    position: relative;
+    z-index: 1;
+}
+
+.main .container .row {
+    position: relative;
+    z-index: 1;
+}
+
+.main .container .row .col-lg-6,
+.main .container .row .col-md-6 {
+    position: relative;
+    z-index: 1; 
+}
+
+.main .container .row .col-lg-6 .button-go {
+    position: relative;
+    z-index: 1; 
+}
+
+.card-img-top {
+    width: 100%;
+    height: 100%;
+}
+
+.welcome {
+    height: 100%;
+}
+.h1-text {
+    text-align: left;
+    font-size: 3.4rem;
+    font-weight: 600;
+}
+.p-text {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+.section {
+
+}
+
+.button {
+    border: none;
+    background-color: #ffffff !important;
+    color: rgb(0, 0, 0) !important;
+    width: 11rem;
+    height: 3rem;
+    border-radius: 8px;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.button-go {
+    border: none;
+    background-color: #ffa4df;
+    color: rgb(255, 255, 255);
+    width: 21rem;
+    height: 3rem;
+    border-radius: 8px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    transition: color 0.4s ease;
+    transition: border 0.4s ease;
+}
+.button-go:hover {
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+}
+
+.owl-prev span {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 40px; /* Ширина стрелок */
+    height: 60px; /* Высота стрелок */
+    border-radius: 50%; /* Закругление углов */
+    font-size: 80px; /* Размер иконок стрелок */
+    color: rgb(232, 232, 232); /* Цвет иконок стрелок */
+    line-height: 50px; /* Выравнивание по вертикали */
+    text-align: center; /* Выравнивание по горизонтали */
+    cursor: pointer; /* Показать указатель при наведении */
+}
+
+.owl-next span {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 40px; /* Ширина стрелок */
+    height: 60px; /* Высота стрелок */
+    border-radius: 50%; /* Закругление углов */
+    font-size: 80px; /* Размер иконок стрелок */
+    color: rgb(232, 232, 232);/* Цвет иконок стрелок */
+    line-height: 50px; /* Выравнивание по вертикали */
+    text-align: center; /* Выравнивание по горизонтали */
+    cursor: pointer; /* Показать указатель при наведении */
+}
+  
+
+.owl-prev {
+  left: 10px; /* Расположение левой стрелки */
+}
+
+.owl-next {
+    right: 10px; /* Расположение правой стрелки */
+}
+
+.owl-dots {
+    text-align: center; /* Выравнивание точек по центру */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+.owl-dot {
+    display: inline-block; /* Для отображения точек в виде списка */
+    width: 40px; /* Ширина точек */
+    height: 40px; /* Высота точек */
+    margin: 0 5px; /* Внешний отступ между точками */
+    border-radius: 50%; /* Закругление углов для создания круглых точек */
+    background-color: #a96d6d; /* Цвет неактивных точек */
+    transition: background-color 0.3s ease; /* Плавное изменение цвета */
+}
+
+.owl-dot.active {
+    background-color: #151313; /* Цвет активной точки */
+}
+
+.registration-form {
+    width: 450px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .registration-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+
+  .form-group label {
+    display: flex;
+    align-items: center;
+  }
+  
+  .form-group label i {
+    margin-right: 10px;
+  }
+
+  .login-form {
+    width: 450px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .checkbox-label {
+    display: inline-block; /* Размещаем элементы в одну строку */
+    margin-bottom: 0.5rem; /* Небольшой отступ снизу */
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Стилизация чекбокса */
+input[type="checkbox"] {
+    appearance: none; /* Убираем стандартный вид чекбокса */
+    width: 20px; /* Установка ширины */
+    height: 20px; /* Установка высоты */
+    border: 2px solid #ccc; /* Установка границы */
+    border-radius: 4px; /* Закругление углов */
+    vertical-align: middle; /* Выравнивание по вертикали */
+    margin-right: 0.5rem; /* Небольшой отступ справа */
+}
+
+/* Стили для изменения внешнего вида чекбокса при выборе */
+input[type="checkbox"]:checked {
+    background-color: #007bff; /* Цвет фона при выборе */
+    border-color: #007bff; /* Цвет границы при выборе */
+}
+
+/* Скрытие по умолчанию кнопки выбора чекбокса */
+input[type="checkbox"]::before {
+    content: ""; /* Удаление стандартного содержимого */
+    display: block; /* Показываем элемент как блок */
+    width: 10px; /* Установка ширины */
+    height: 10px; /* Установка высоты */
+    background-color: white; /* Цвет фона */
+    border-radius: 50%; /* Круглая форма */
+    margin: 3px; /* Внутренний отступ */
+    transition: background-color 0.3s, border-color 0.3s; /* Плавное изменение цвета */
+}
+
+/* Отображение кнопки выбора чекбокса при выборе */
+input[type="checkbox"]:checked::before {
+    background-color: white; /* Цвет фона при выборе */
+}
+
+.categories {
+    color: black;
+    margin-bottom: 1rem;
+    margin-top: 4rem;
+}
+
+.overlay-container {
+    position: relative;
+    width: 100%;  /* или другая фиксированная ширина в зависимости от вашего дизайна */
+    height: auto; /* высота будет зависеть от содержимого, если необходимо, задайте фиксированную высоту */
+}
+
+.picture {
+    position: absolute;
+    top: 10%;   /* центрирование по вертикали */
+    left: 25%;  /* центрирование по горизонтали */
+    transform: translate(-50%, -50%); /* смещение для точного центрирования */
+    z-index: 10; /* убедитесь, что изображение находится поверх текста */
+    max-width: 100%; /* адаптивный размер изображения, если нужно */
+    height: auto;
+}
+.picture-l{
+}
+
+.slovo {
+
+}
+
+
+.slovo {
+    position: relative; /* чтобы текст был под изображением */
+    z-index: 1; /* меньше, чем у изображения */
+    width: 35rem;
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 20px;
+    background-color: #f0f0f0; /* Светло-серый фон, вы можете выбрать любой цвет */
+    border-radius: 20px; /* Скругление углов для создания формы облачка */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25); /* Тень для добавления глубины */
+    display: inline-block; /* Обеспечивает, что фон будет только вокруг текста */
+    margin: 20px auto;
+}
+
+.answer {
+    border: none !important;
+    border-radius: 10px;
+    background-color: rgb(178,176,247);
+    color: white;
+    cursor: pointer;
+    width: 45rem !important; 
+    height: 4rem !important; 
+    margin-top: 1.5rem !important;
+    font-size: 1.8rem;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.answer:hover {
+    background-color: rgb(154, 150, 255); /* Светло-синий фон при наведении, измените на нужный цвет */
+    color: white; /* Белый текст при наведении */
+    transform: scale(1.05); /* Увеличение размера кнопки при наведении */
+}
+
+.question {
+    font-size: 2rem;
+}
+.question p {
+    font-size: 2.5rem;
+}
+
+.options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5rem;
+    margin: 2rem;
+}
+.option {
+    cursor: pointer;
+}
+.option:hover {
+    transform: scale(1.3);
+}
+
+.option {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #f0f0f0;
+
+    cursor: pointer;
+}
+.dragging {
+    opacity: 0.5;
+}
+.grammar_button {
+    font-size: 2.5rem;
+    width: 100%;
+    height: auto;
+}
+
+.gap {
+    display: inline-block;
+    min-width: 50px;
+    padding: 3px 6px;
+    border-bottom: 2px dashed #666;
+    text-align: center;
+    color: #666;
+}
+
+.error {
+    font-size: 1.5rem;
+}
+
+.modal-text {
+    color: black;
+    font-size: 1.2rem;
+}

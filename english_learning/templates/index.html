@@ -1,0 +1,206 @@
+{% load static %}
+<html lang="en, ru">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Puzzl-E!</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body> 
+    <nav class="navbar navbar-default navbar-trans navbar-expand-lg" role="navigation">
+        <div class="container mt-1">
+            <a class="navbar-brand text-brand nav-text" href="{% url 'index' %}"><img src="{% static 'assets/logo.png' %}" class="logo" alt="logo"> PUZZLE-E</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <form action="{% url 'logout' %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="button">Выйти</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item active">
+                            <a class="nav-link nav-text" href="{% url 'login' %}"><button class="button">Войти</button></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-text" href="{% url 'register' %}"><button class="button">Регистрация</button></a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+        
+    <div class="section main d-flex justify-content-center align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="d-flex flex-column align-items-start col-lg-6 col-md-6">
+                    <h1 class="h1-text text-white">Изучайте английский язык вместе с Puzzl-E!</h1>
+                    <p class="p-text text-white mt-2">Puzzl-E основывается на изучении английского языка для уровней Beginner и Intermediate. <br>
+                                                      Вы можете изучать новые слова, грамматику и смотреть видео на английском языке каждый день вместе c Puzzl-E!</p>
+                    {% if user.is_authenticated %}
+                        <button class="button-go"><a class="nav-link" href="{% url 'main' %}">Хочу выучить английский!</a></button>
+                    {% else %}
+                        <button class="button-go"><a class="nav-link" href="{% url 'register' %}">Хочу выучить английский!</a></button>
+                    {% endif %}
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="owl-carousel">
+                                    {% if vocab_test %}
+                                    <div class="card">
+                                        <div class="d-flex align-items-center justify-content-center" style="height: 350px;">
+                                            {% if vocab_test.category.image %}
+                                                {% if vocab_test.completed %}
+                                                    <a href="{% url 'start_test' vocab_test.id %}"><img src="{{ vocab_test.category.image.url }}" alt="{{ vocab_test.category.name }}" class="card-img-top"></a>
+                                                {% else %}
+                                                    <a href="{% url 'question' vocab_test.id %}"><img src="{{ vocab_test.category.image.url }}" alt="{{ vocab_test.category.name }}" class="card-img-top"></a>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ vocab_test.category.name }}</h5>
+                                            <p class="card-text">Пройдите тест по категории {{ vocab_test.category.name }}</p>
+                                            {% if vocab_test.completed %}
+                                                <a href="{% url 'start_test' vocab_test.id %}" class="btn btn-primary">Пройти еще раз</a>
+                                            {% else %}
+                                                <a href="{% url 'question' vocab_test.id %}" class="btn btn-primary">Пройти тест</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                
+                                    {% if grammar_test %}
+                                    <div class="card">
+                                        <div class="d-flex align-items-center justify-content-center" style="height: 350px;">
+                                            {% if grammar_test.category.image %}
+                                                {% if grammar_test.completed %}
+                                                    <a href="{% url 'start_grammar_test' grammar_test.id %}">
+                                                        <img src="{{ grammar_test.category.image.url }}" alt="{{ grammar_test.category.name }}" class="card-img-top">
+                                                    </a>
+                                                {% else %}
+                                                    <a href="{% url 'grammar_test' grammar_test.id %}">
+                                                        <img src="{{ grammar_test.category.image.url }}" alt="{{ grammar_test.category.name }}" class="card-img-top">
+                                                    </a>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ grammar_test.category.name }}</h5>
+                                            <p class="card-text">Пройдите тест по категории {{ grammar_test.category.name }}</p>
+                                            {% if grammar_test.completed %}
+                                                <a href="{% url 'start_grammar_test' grammar_test.id %}" class="btn btn-primary">Пройти еще раз</a>
+                                            {% else %}
+                                                <a href="{% url 'grammar_test' grammar_test.id %}" class="btn btn-primary">Пройти тест</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                
+                                    {% if listening_test %}
+                                    <div class="card">
+                                        <div class="d-flex align-items-center justify-content-center" style="height: 350px;">
+                                            {% if listening_test.category.image %}
+                                                {% if listening_test.completed %}
+                                                    <a href="{% url 'start_listening_test' listening_test.id %}"><img src="{{ listening_test.category.image.url }}" alt="{{ listening_test.category.name }}" class="card-img-top"></a>
+                                                {% else %}
+                                                    <a href="{% url 'audio_test' listening_test.id %}"><img src="{{ listening_test.category.image.url }}" alt="{{ listening_test.category.name }}" class="card-img-top"></a>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ listening_test.category.name }}</h5>
+                                            <p class="card-text">Пройдите тест по категории {{ listening_test.category.name }}</p>
+                                            {% if listening_test.completed %}
+                                                <a href="{% url 'start_listening_test' listening_test.id %}" class="btn btn-primary">Пройти еще раз</a>
+                                            {% else %}
+                                                <a href="{% url 'audio_test' listening_test.id %}" class="btn btn-primary">Пройти тест</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>       
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section main vh100 d-flex flex-column align-items-center justify-content-center">
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="row">
+                <div class="d-flex flex-column align-items-center justify-content-center col-lg-6 col-md-6">
+                    <h1 class="h1-text text-white w100">Учиться на дому</h1>
+                    <p class="p-text text-white">Проходите тесты и учите новые слова не выходя из дома</p>
+                </div>
+                <div class="d-flex flex-column align-items-start justify-content-center col-lg-6 col-md-6">
+                    <img class="img-fluid" style="margin-bottom: 6rem; width: 100%; height: 90%;" src="{% static 'assets/index1.png' %}" alt="">                
+                </div>        
+            </div>
+        </div>
+    </div>
+
+    <div class="section main vh100 d-flex flex-column align-items-center justify-content-center">
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="row">
+                <div class="d-flex flex-column align-items-start justify-content-center col-lg-6 col-md-6">
+                    <img class="img-fluid" style="margin-bottom: 6rem; width: 100%; height: 90%;" src="{% static 'assets/index2.png' %}" alt="">                
+                </div>  
+                <div class="d-flex flex-column align-items-center justify-content-center col-lg-6 col-md-6">
+                    <h1 class="h1-text text-white">Интересные тесты</h1>
+                    <p class="p-text text-white">Практикуйте себя в различных весёлых тестах</p>
+                </div>      
+            </div>
+        </div>
+    </div>
+    
+    <div class="section main vh100 d-flex flex-column align-items-center justify-content-center">
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="row">
+                <div class="d-flex flex-column align-items-center justify-content-center col-lg-6 col-md-6">
+                    <h1 class="h1-text text-white w100">Лингвистика</h1>
+                    <p class="p-text text-white">Улучшайте свои лингвистические навыки вместе с Puzzl-E</p>
+                </div>
+                <div class="d-flex flex-column align-items-start justify-content-center col-lg-6 col-md-6">
+                    <img class="img-fluid" style="margin-bottom: 6rem; width: 100%; height: 90%;" src="{% static 'assets/index3.png' %}" alt="">                
+                </div>  
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $(".owl-carousel").owlCarousel({
+                items: 1,
+                loop: true,
+                margin: 10,
+                nav: true,
+                dots: true,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true
+            });
+        });
+    </script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'script.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+{% load static %}
+<html lang="en, ru">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Puzzl-E!</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body> 
+    <nav class="navbar navbar-default navbar-trans navbar-expand-lg" role="navigation">
+        <div class="container mt-1">
+            <a class="navbar-brand text-brand nav-text2" href="/home"><img src="{% static 'assets/logo.png' %}" class="logo" alt="logo"> PUZZLE-E</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <form action="/logout/" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="button">Выйти</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item active">
+                            <a class="nav-link nav-text" href="/login"><button class="button">Войти</button></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-text" href="/register"><button class="button">Регистрация</button></a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="section container mt-5">
+        
+        <div class="row">
+            <h1 class="categories">Vocabulary</h1>
+
+            {% for test in tests %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="d-flex align-items-center justify-content-center" style="height: 350px;">
+                        {% if test.category.image %}
+                            {% if test.completed %}
+                                <a href="{% url 'start_test' test.id %}"><img src="{{ test.category.image.url }}" alt="{{ test.category.name }}" class="card-img-top"></a>
+                            {% else %}
+                                <a href="{% url 'question' test.id %}"><img src="{{ test.category.image.url }}" alt="{{ test.category.name }}" class="card-img-top"></a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ test.category.name }}</h5>
+                        <p class="card-text">Пройдите тест по категории {{ test.category.name }}</p>
+                        {% if test.completed %}
+                            <a href="{% url 'start_test' test.id %}" class="btn btn-primary">Пройти еще раз</a>
+                        {% else %}
+                            <a href="{% url 'question' test.id %}" class="btn btn-primary">Пройти тест</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <div class="row">
+            <h1 class="categories">Grammar</h1>
+
+            {% for test in grammar_tests %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="d-flex align-items-center justify-content-center" style="height: 350px;">
+                        {% if test.category.image %}
+                            {% if test.completed %}
+                                <a href="{% url 'start_grammar_test' test.id %}">
+                                    <img src="{{ test.category.image.url }}" alt="{{ test.category.name }}" class="card-img-top">
+                                </a>
+                            {% else %}
+                                <a href="{% url 'grammar_test' test.id %}">
+                                    <img src="{{ test.category.image.url }}" alt="{{ test.category.name }}" class="card-img-top">
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ test.category.name }}</h5>
+                        <p class="card-text">Пройдите тест по категории {{ test.category.name }}</p>
+                        {% if test.completed %}
+                            <a href="{% url 'start_grammar_test' test.id %}" class="btn btn-primary">Пройти еще раз</a>
+                        {% else %}
+                            <a href="{% url 'grammar_test' test.id %}" class="btn btn-primary">Пройти тест</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="row">
+            <h1 class="categories">Listening</h1>
+
+            {% for test in audio_tests %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="d-flex align-items-center justify-content-center" style="height: 350px;">
+                        {% if test.completed %}
+                            <a href="{% url 'start_listening_test' test.id %}"><img src="{{ test.category.image.url }}" alt="{{ test.category.name }}" class="card-img-top"></a>
+                        {% else %}
+                            <a href="{% url 'audio_test' test.id %}"><img src="{{ test.category.image.url }}" alt="{{ test.category.name }}" class="card-img-top"></a>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ test.category }}</h5>
+                        <p class="card-text">Пройдите тест по категории {{ test.category }}</p>
+                        {% if test.completed %}
+                            <a href="{% url 'start_listening_test' test.id %}" class="btn btn-primary">Пройти еще раз</a>
+                        {% else %}
+                            <a href="{% url 'audio_test' test.id %}" class="btn btn-primary">Пройти тест</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+                    
+        </div>
+
+    </div>
+
+
+    <footer></footer>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'script.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+</body>
+</html>
